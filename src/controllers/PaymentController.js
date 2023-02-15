@@ -2,32 +2,23 @@ const PaymentService = require('../services/PaymentService');
 
 module.exports = {
     listAll: async (req, res) => {
-        let response = {error: '', result: []};
-        let payments = await PaymentService.listAll();
-
-        for (let i in payments) {
-            response.result.push({
-                id: payments[i].id,
-                amount: payments[i].amount,
-                type: payments[i].type,
-                status: payments[i].status,
-                buyer_id: payments[i].buyer_id,
-                card_id: payments[i].card_id
-            })
-        }
-        res.json(response);
+        let payments = await PaymentService.list();
+        res.json(payments);
     },
 
     listOne: async (req, res) => {
-        let response = {error: '', result: {}};
         let id = req.params.id;
-        let payment = await PaymentService.listOne(id);
+        let payment = await PaymentService.pick(id);
+        res.json(payment);
+    },
 
-        if (payment) {
-            response.result = payment;
-        }
-
-        res.json(response);
+    create: async (req, res) => {
+        console.log(req.body);
+        await PaymentService.create(req.body)
+            .then(() => {
+                return res.json({"result": "created successfully"});
+            }).catch(() => {
+                return res.status(400).json({"result": "Error on creation"});
+            })
     }
-
 }

@@ -1,30 +1,17 @@
-const db = require('../db')
+const Payment = require("../models/PaymentModel");
 
 module.exports = {
-    listAll: () => {
-        return new Promise((acc, rej) => {
-            db.query('SELECT * FROM payment', (error, results) => {
-                if (error) {
-                    rej(error);
-                    return;
-                }
-                acc(results);
-            });
+    list: async () => {
+        return await Payment.findAll();
+    },
+    pick: async (id) => {
+        return await Payment.findAll({
+            where: {
+                id: id
+            }
         });
     },
-    listOne: (id) => {
-        return new Promise((acc, rej) => {
-            db.query('SELECT * FROM payment WHERE payment.id = ?', [id], (error, results)=> {
-                if (error) {
-                    rej(error);
-                    return;
-                }
-                if (results.length > 0) {
-                    acc(results[0]);
-                } else {
-                    acc(false);
-                }
-            })
-        })
+    create: async (body) => {
+        await Payment.create(body);
     }
 };

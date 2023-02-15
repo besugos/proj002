@@ -9,8 +9,8 @@ const port = process.env.PORT || 3000;
 const server = express();
 
 server.use(cors());
-server.use(bodyParser.urlencoded({extended:false}));
-
+server.use(bodyParser.urlencoded({extended:true}));
+server.use(bodyParser.json());
 server.use('/', routes);
 
 server.listen(port, () => {
