@@ -1,6 +1,9 @@
 const BuyerService = require('../services/BuyerService');
 
 module.exports = {
+    getBuyerById: async(id) => {
+        return await BuyerService.findById(id);
+    },
     create: async (body) => {
         let existingBuyer = await BuyerService.findByCpf(body.cpf);
         if (existingBuyer.length > 0) {

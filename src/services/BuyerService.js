@@ -8,6 +8,13 @@ module.exports = {
             }
         });
     },
+    findById: async (id) => {
+        return (await Buyer.findAll({
+            where: {
+                id: id
+            }
+        }))[0];
+    },
     create: async (body) => {
         let id = await Buyer.create(body);
         return id.dataValues.id;

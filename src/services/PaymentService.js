@@ -5,11 +5,11 @@ module.exports = {
         return await Payment.findAll();
     },
     pick: async (id) => {
-        return await Payment.findAll({
+        return (await Payment.findAll({
             where: {
                 id: id
             }
-        });
+        }))[0];
     },
     create: async (body) => {
         await Payment.create(body);

@@ -11,6 +11,11 @@ module.exports = {
     listOne: async (req, res) => {
         let id = req.params.id;
         let payment = await PaymentService.pick(id);
+        if (payment) {
+            let buyer = await BuyerController.getBuyerById(payment.buyer_id);
+            console.log(buyer.dataValues);
+            payment.dataValues.buyer = buyer.dataValues;
+        }
         res.json(payment);
     },
 
