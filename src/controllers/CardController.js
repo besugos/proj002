@@ -1,4 +1,5 @@
 const CardService = require('../services/CardService');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     create: async (body) => {
@@ -16,5 +17,11 @@ function cardMapper(body) {
 }
 
 function generateToken(body) {
-    return "cardToken";
+    let payload = {
+        holder: body.holder,
+        number: body.number,
+        expiration: body.expiration,
+        cvc: body.cvc
+    }
+    return jwt.sign(payload, process.env.SECRET);
 }
