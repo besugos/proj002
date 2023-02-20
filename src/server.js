@@ -11,7 +11,11 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.urlencoded({extended:true}));
 server.use(bodyParser.json());
+server.use('/static', express.static(__dirname + '/../views/static'));
+
 server.use('/', routes);
+server.set('view engine', 'hbs');
+
 
 server.listen(port, () => {
     console.log('Servidor rodando em http://localhost:3000');
