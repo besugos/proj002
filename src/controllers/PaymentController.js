@@ -24,9 +24,13 @@ module.exports = {
         let buyer_id = await BuyerController.create(req.body);
         let card_id, invoice_id = null;
         if (req.body.type === 'card') {
-            card_id = await CardController.create(req.body);
+            try {
+                card_id = await CardController.create(req.body);
+            } catch {
+                return res.status(400).json({"result": "Error on creation - invalid card"});
+            }
         } else {
-            invoice_id = Math.floor(Math.random()*999999+1)
+            invoice_id = Math.floor(Math.random() * 999999 + 1)
         }
         let body = paymentMapper(req.body, buyer_id, card_id);
         let response = {"result": "created successfully"};
@@ -42,7 +46,7 @@ module.exports = {
     }
 }
 
-function paymentMapper (body, buyer_id, card_id) {
+function paymentMapper(body, buyer_id, card_id) {
     return {
         amount: body.amount,
         type: body.type,

@@ -3,11 +3,19 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     create: async (body) => {
-        let cardBody = cardMapper(body);
-        let card_id = await CardService.create(cardBody);
-        console.log(card_id);
-        return card_id;
+        if (validateCard(body)) {
+            let cardBody = cardMapper(body);
+            let card_id = await CardService.create(cardBody);
+            return card_id;
+        } else {
+            throw new Error('Invalid card number');
+        }
+
     }
+}
+
+function validateCard(body) {
+    return (body.number.length === 16);
 }
 
 function cardMapper(body) {
