@@ -11,7 +11,6 @@ module.exports = {
         } else {
             let buyerBody = buyerMapper(body);
             let buyer_id = await BuyerService.create(buyerBody);
-            console.log(buyer_id);
             return buyer_id;
         }
     }

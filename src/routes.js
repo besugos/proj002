@@ -13,8 +13,16 @@ router.get('/', (req, res) => {
     });
 })
 
-router.get('/cadastro', (request, response) => {
-    response.render('cadastro', {
+router.get('/cadastro', (req, res) => {
+    res.render('cadastro', {
+        subject: 'hbs template engine',
+        name: 'our template',
+        link: 'https://google.com'
+    });
+});
+
+router.get('/detalhes/:id', (req, res) => {
+    res.render('detalhes', {
         subject: 'hbs template engine',
         name: 'our template',
         link: 'https://google.com'
