@@ -2,6 +2,7 @@ require('dotenv').config({path:'.env'});
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const hbs = require("hbs");
 
 const routes = require('./routes')
 
@@ -15,6 +16,7 @@ server.use('/static', express.static(__dirname + '/../views/static'));
 
 server.use('/', routes);
 server.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + "/../views/partials");
 
 
 server.listen(port, () => {
