@@ -10,10 +10,6 @@ $(document).ready( async function () {
         })
 } );
 
-$("#new-payment").click(function() {
-    window.location.href = 'http://localhost:3000/cadastro';
-})
-
 function mountTable(data) {
     let table = $('#table_id').DataTable({
         data: data,
