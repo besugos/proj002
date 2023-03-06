@@ -39,14 +39,13 @@ function mountTable(data) {
 
 
 function mapper(data) {
-    let response = [];
-    for (let obj of data) {
+    let response = data.map((obj) => {
         let line = [];
         line.push(obj.id);
         line.push(obj.amount);
         line.push(obj.type);
         line.push(obj.status);
-        response.push(line);
-    }
+        return line;
+    })
     return response
 }

@@ -7,7 +7,6 @@ $(document).ready( async function () {
     let id = currentUrl.split('/')[(currentUrl.split('/').length) - 1]
     axios.get(`http://localhost:3000/payment/${id}`)
         .then(function (response) {
-            console.log(response.data);
             fillFields(response.data);
         })
         .catch(function (error) {

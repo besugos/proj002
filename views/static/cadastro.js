@@ -26,7 +26,6 @@ function mountBody() {
         body.expiration = $('#cardExp').val();
         body.cvc = $('#cardCvc').val();
     }
-    console.log(body);
     return body;
 }
 

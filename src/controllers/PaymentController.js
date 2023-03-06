@@ -13,14 +13,12 @@ module.exports = {
         let payment = await PaymentService.pick(id);
         if (payment) {
             let buyer = await BuyerController.getBuyerById(payment.buyer_id);
-            console.log(buyer.dataValues);
             payment.dataValues.buyer = buyer.dataValues;
         }
         res.json(payment);
     },
 
     create: async (req, res) => {
-        console.log(req.body);
         let buyer_id = await BuyerController.create(req.body);
         let card_id, invoice_id = null;
         if (req.body.type === 'card') {
